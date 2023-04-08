@@ -19,20 +19,20 @@ locals {
 }
 
 module "ssm" {
-  source = "../modules/ssm"
+  source = "./modules/ssm"
 
   ssm_parameter_name  = local.ssm_parameter_name
   ssm_parameter_value = local.ssm_parameter_value
 }
 
 module "codecommit" {
-  source = "../modules/codecommit"
+  source = "./modules/codecommit"
 
   repository_name = local.repository_name
 }
 
 module "eventbridge" {
-  source = "../modules/eventbridge"
+  source = "./modules/eventbridge"
 
   event_rule_name = local.event_rule_name
   function_name   = local.function_name
@@ -41,14 +41,14 @@ module "eventbridge" {
 }
 
 module "lambda" {
-  source = "../modules/lambda"
+  source = "./modules/lambda"
 
   function_name      = local.function_name
   ssm_parameter_name = local.ssm_parameter_name
 }
 
 module "project1_codepipeline" {
-  source = "../modules/codepipeline"
+  source = "./modules/codepipeline"
 
   codepipeline_name = local.project1_codepipeline_name
   repository_name   = local.repository_name
@@ -56,7 +56,7 @@ module "project1_codepipeline" {
 }
 
 module "project2_codepipeline" {
-  source = "../modules/codepipeline"
+  source = "./modules/codepipeline"
 
   codepipeline_name = local.project2_codepipeline_name
   repository_name   = local.repository_name
