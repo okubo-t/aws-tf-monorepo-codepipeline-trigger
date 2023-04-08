@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - echo Build started on `date`
+      - ls -al
+
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo "codepipeliine trigger test" > artifacts.txt
+
+artifacts:
+  files: artifacts.txt
