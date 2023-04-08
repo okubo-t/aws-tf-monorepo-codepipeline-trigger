@@ -6,16 +6,16 @@ locals {
 
   ssm_parameter_name = "codepipeline-trigger"
   ssm_parameter_value = jsonencode({
-    "app1" : "app1-codepipeline",
-    "app2" : "app2-codepipeline"
+    "project1" : "project1-codepipeline",
+    "project2" : "project2-codepipeline"
   })
 
   event_rule_name = "monorepo-change-event"
 
   function_name = "codepipeline-trigger"
 
-  app1_codepipeline_name = "app1-codepipeline"
-  app2_codepipeline_name = "app2-codepipeline"
+  project1_codepipeline_name = "project1-codepipeline"
+  project2_codepipeline_name = "project2-codepipeline"
 }
 
 module "ssm" {
@@ -47,18 +47,18 @@ module "lambda" {
   ssm_parameter_name = local.ssm_parameter_name
 }
 
-module "app1_codepipeline" {
+module "project1_codepipeline" {
   source = "../modules/codepipeline"
 
-  codepipeline_name = local.app1_codepipeline_name
+  codepipeline_name = local.project1_codepipeline_name
   repository_name   = local.repository_name
   branch_name       = local.branch_name
 }
 
-module "app2_codepipeline" {
+module "project2_codepipeline" {
   source = "../modules/codepipeline"
 
-  codepipeline_name = local.app2_codepipeline_name
+  codepipeline_name = local.project2_codepipeline_name
   repository_name   = local.repository_name
   branch_name       = local.branch_name
 }
